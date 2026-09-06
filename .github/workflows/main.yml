@@ -21,14 +21,14 @@ jobs:
       - name: Configurar Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.2'
+          flutter-version: '3.47.2'
           channel: stable
 
       - name: Instalar dependências
         run: flutter pub get
 
       - name: Compilar Flutter Web
-        run: flutter build web --release --base-href /ePublic/
+        run: flutter build web --release --base-href /Public/
 
       - name: Configurar Pages
         uses: actions/configure-pages@v5
