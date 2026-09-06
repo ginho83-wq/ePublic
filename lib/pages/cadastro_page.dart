@@ -14,7 +14,8 @@ class _CadastroPageState extends State<CadastroPage> {
 
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
-  final _confirmarSenhaController = TextEditingController();
+  final _confirmarSenhaController =
+  TextEditingController();
 
   bool _carregando = false;
 
@@ -39,10 +40,10 @@ class _CadastroPageState extends State<CadastroPage> {
       final email = _emailController.text.trim();
       final senha = _senhaController.text;
 
-      // =====================================================
-      // URL PARA ONDE O SUPABASE VOLTA APÓS A CONFIRMAÇÃO
-      // =====================================================
-      final redirectUrl = '${Uri.base.origin}/auth/callback';
+      // URL para onde o Supabase volta
+      // depois da confirmação do e-mail.
+      final redirectUrl =
+          'https://ginho83-wq.github.io/ePublic/auth/callback';
 
       final response =
       await Supabase.instance.client.auth.signUp(
@@ -53,18 +54,10 @@ class _CadastroPageState extends State<CadastroPage> {
 
       if (!mounted) return;
 
-      // =====================================================
-      // SE JÁ EXISTIR SESSÃO
-      // =====================================================
-
       if (response.session != null) {
         context.go('/');
         return;
       }
-
-      // =====================================================
-      // CONFIRMAÇÃO DE E-MAIL NECESSÁRIA
-      // =====================================================
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -123,15 +116,12 @@ class _CadastroPageState extends State<CadastroPage> {
                 children: [
                   Text(
                     'Criar conta no Epublic',
-                    style:
-                    Theme.of(context).textTheme.headlineSmall,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall,
                   ),
 
                   const SizedBox(height: 30),
-
-                  // =================================================
-                  // E-MAIL
-                  // =================================================
 
                   TextFormField(
                     controller: _emailController,
@@ -157,10 +147,6 @@ class _CadastroPageState extends State<CadastroPage> {
 
                   const SizedBox(height: 16),
 
-                  // =================================================
-                  // PALAVRA-PASSE
-                  // =================================================
-
                   TextFormField(
                     controller: _senhaController,
                     obscureText: true,
@@ -169,7 +155,8 @@ class _CadastroPageState extends State<CadastroPage> {
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null ||
+                          value.isEmpty) {
                         return 'Digite uma palavra-passe';
                       }
 
@@ -183,10 +170,6 @@ class _CadastroPageState extends State<CadastroPage> {
 
                   const SizedBox(height: 16),
 
-                  // =================================================
-                  // CONFIRMAR PALAVRA-PASSE
-                  // =================================================
-
                   TextFormField(
                     controller:
                     _confirmarSenhaController,
@@ -197,11 +180,13 @@ class _CadastroPageState extends State<CadastroPage> {
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null ||
+                          value.isEmpty) {
                         return 'Confirme a palavra-passe';
                       }
 
-                      if (value != _senhaController.text) {
+                      if (value !=
+                          _senhaController.text) {
                         return 'As palavras-passe não coincidem';
                       }
 
@@ -211,16 +196,14 @@ class _CadastroPageState extends State<CadastroPage> {
 
                   const SizedBox(height: 24),
 
-                  // =================================================
-                  // BOTÃO CRIAR CONTA
-                  // =================================================
-
                   SizedBox(
                     width: double.infinity,
                     height: 48,
                     child: FilledButton(
                       onPressed:
-                      _carregando ? null : _cadastrar,
+                      _carregando
+                          ? null
+                          : _cadastrar,
                       child: _carregando
                           ? const SizedBox(
                         width: 22,
@@ -228,15 +211,13 @@ class _CadastroPageState extends State<CadastroPage> {
                         child:
                         CircularProgressIndicator(),
                       )
-                          : const Text('Criar conta'),
+                          : const Text(
+                        'Criar conta',
+                      ),
                     ),
                   ),
 
                   const SizedBox(height: 16),
-
-                  // =================================================
-                  // VOLTAR PARA LOGIN
-                  // =================================================
 
                   TextButton(
                     onPressed: _carregando
@@ -257,4 +238,3 @@ class _CadastroPageState extends State<CadastroPage> {
     );
   }
 }
-

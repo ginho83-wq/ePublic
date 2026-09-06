@@ -40,7 +40,8 @@ class AuthService {
   Future<bool> loginComGoogle() async {
     final response = await _supabase.auth.signInWithOAuth(
       OAuthProvider.google,
-      redirectTo: 'http://localhost:8080/auth/callback',
+      redirectTo:
+      'https://ginho83-wq.github.io/ePublic/auth/callback',
     );
 
     return response;
@@ -50,3 +51,4 @@ class AuthService {
     await _supabase.auth.signOut();
   }
 }
+

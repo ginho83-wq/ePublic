@@ -11,7 +11,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
 
@@ -76,7 +75,8 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await Supabase.instance.client.auth.signInWithOAuth(
         OAuthProvider.google,
-        redirectTo: 'http://localhost:8080/auth/callback',
+        redirectTo:
+        'https://ginho83-wq.github.io/ePublic/auth/callback',
       );
     } on AuthException catch (e) {
       if (!mounted) return;
@@ -124,20 +124,24 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Text(
                     'Entrar no Epublic',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall,
                   ),
 
                   const SizedBox(height: 30),
 
                   TextFormField(
                     controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType:
+                    TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       labelText: 'E-mail',
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
+                      if (value == null ||
+                          value.trim().isEmpty) {
                         return 'Digite o seu e-mail';
                       }
 
@@ -156,11 +160,13 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: !_mostrarSenha,
                     decoration: InputDecoration(
                       labelText: 'Palavra-passe',
-                      border: const OutlineInputBorder(),
+                      border:
+                      const OutlineInputBorder(),
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
-                            _mostrarSenha = !_mostrarSenha;
+                            _mostrarSenha =
+                            !_mostrarSenha;
                           });
                         },
                         icon: Icon(
@@ -171,7 +177,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null ||
+                          value.isEmpty) {
                         return 'Digite a palavra-passe';
                       }
 
@@ -185,7 +192,8 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     height: 48,
                     child: FilledButton(
-                      onPressed: _carregando ? null : _login,
+                      onPressed:
+                      _carregando ? null : _login,
                       child: _carregando
                           ? const CircularProgressIndicator()
                           : const Text('Entrar'),
@@ -196,12 +204,19 @@ class _LoginPageState extends State<LoginPage> {
 
                   const Row(
                     children: [
-                      Expanded(child: Divider()),
+                      Expanded(
+                        child: Divider(),
+                      ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding:
+                        EdgeInsets.symmetric(
+                          horizontal: 12,
+                        ),
                         child: Text('OU'),
                       ),
-                      Expanded(child: Divider()),
+                      Expanded(
+                        child: Divider(),
+                      ),
                     ],
                   ),
 
@@ -211,9 +226,13 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     height: 48,
                     child: OutlinedButton.icon(
-                      onPressed: _carregando ? null : _loginGoogle,
+                      onPressed: _carregando
+                          ? null
+                          : _loginGoogle,
                       icon: const Icon(Icons.login),
-                      label: const Text('Entrar com Google'),
+                      label: const Text(
+                        'Entrar com Google',
+                      ),
                     ),
                   ),
 
